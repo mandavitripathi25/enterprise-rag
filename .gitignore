@@ -1,0 +1,11 @@
+cd C:\Users\mandavi\Downloads\enterprise-rag-groq\enterprise-rag
+
+@"
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+chroma_db/
+.DS_Store
+"@ | Set-Content -Encoding ascii .gitignore

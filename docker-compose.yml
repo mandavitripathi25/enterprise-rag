@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: .
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    environment:
+      CHROMA_DIR: /data/chroma
+    volumes:
+      - chroma_data:/data/chroma
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: .
+    command: streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+
+volumes:
+  chroma_data:
